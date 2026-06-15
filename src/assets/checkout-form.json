@@ -1,0 +1,57 @@
+[
+  {
+    "name": "fullName",
+    "type": "text",
+    "label": "Full Name",
+    "placeholder": "John Doe",
+    "validators": ["required"]
+  },
+  {
+    "name": "email",
+    "type": "email",
+    "label": "Email Address",
+    "placeholder": "you@example.com",
+    "validators": ["required", "email"]
+  },
+  {
+    "name": "phone",
+    "type": "tel",
+    "label": "Phone Number",
+    "placeholder": "+91 9999999999",
+    "validators": ["required", "minLength:10"]
+  },
+  {
+    "name": "address",
+    "type": "text",
+    "label": "Street Address",
+    "placeholder": "12 MG Road",
+    "validators": ["required"]
+  },
+  {
+    "name": "city",
+    "type": "text",
+    "label": "City",
+    "placeholder": "Bengaluru",
+    "validators": ["required"]
+  },
+  {
+    "name": "state",
+    "type": "select",
+    "label": "State",
+    "options": ["Karnataka", "Maharashtra", "Delhi", "Tamil Nadu", "Gujarat", "Telangana", "Kerala"],
+    "validators": ["required"]
+  },
+  {
+    "name": "pincode",
+    "type": "text",
+    "label": "PIN Code",
+    "placeholder": "560001",
+    "validators": ["required", "minLength:6", "maxLength:6"]
+  },
+  {
+    "name": "updates",
+    "type": "checkbox",
+    "label": "Email Preferences",
+    "placeholder": "Send me order updates by email"
+  }
+]

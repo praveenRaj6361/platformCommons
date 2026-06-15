@@ -1,0 +1,78 @@
+<div class="checkout-page">
+
+  <div class="step-header">
+    <div class="step-trail">
+      <span class="step done">1. Review ✓</span>
+      <span class="sep">›</span>
+      <span class="step done">2. Delivery ✓</span>
+      <span class="sep">›</span>
+      <span class="step active">3. Payment</span>
+    </div>
+    <h1>Payment</h1>
+  </div>
+
+  <div class="payment-card">
+    <form [formGroup]="form" (ngSubmit)="submit()" novalidate>
+
+      <!-- Card number (ControlValueAccessor) -->
+      <div class="field-group">
+        <label class="field-label">Card Number</label>
+        <app-card-input formControlName="cardNumber" />
+        <span class="field-error"
+              *ngIf="form.get('cardNumber')?.touched && form.get('cardNumber')?.invalid">
+          Valid card number is required.
+        </span>
+      </div>
+
+      <!-- Expiry + CVV side by side -->
+      <div class="row-2">
+        <div class="field-group">
+          <label class="field-label" for="expiry">Expiry (MM/YY)</label>
+          <input id="expiry" formControlName="cardExpiry"
+                 type="text" placeholder="08/28" class="input" maxlength="5" />
+          <span class="field-error"
+                *ngIf="form.get('cardExpiry')?.touched && form.get('cardExpiry')?.invalid">
+            Enter valid expiry (MM/YY).
+          </span>
+        </div>
+
+        <div class="field-group">
+          <label class="field-label" for="cvv">CVV</label>
+          <input id="cvv" formControlName="cardCvv"
+                 type="password" placeholder="•••" class="input" maxlength="4" />
+          <span class="field-error"
+                *ngIf="form.get('cardCvv')?.touched && form.get('cardCvv')?.invalid">
+            Enter 3 or 4 digit CVV.
+          </span>
+        </div>
+      </div>
+
+      <!-- Billing address toggle -->
+      <div class="field-group checkbox-row">
+        <input type="checkbox" id="sameAddr" formControlName="sameAsDelivery" />
+        <label for="sameAddr" class="checkbox-label">
+          Billing address same as delivery
+        </label>
+      </div>
+
+      <!-- Dynamic billing fields — only shown when sameAsDelivery is false -->
+      <app-dynamic-form-renderer
+        [config]="billingFields"
+        [formGroup]="form"
+      />
+
+      <!-- Error banner -->
+      <div class="error-banner" *ngIf="error()" role="alert">
+        ⚠ {{ error() }}
+      </div>
+
+      <div class="form-actions">
+        <a routerLink="/shop/checkout/step/2" class="btn-back">← Back</a>
+        <button type="submit" class="btn-pay" [disabled]="submitting()">
+          {{ submitting() ? 'Processing…' : 'Place Order' }}
+        </button>
+      </div>
+
+    </form>
+  </div>
+</div>

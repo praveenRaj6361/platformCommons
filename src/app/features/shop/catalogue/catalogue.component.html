@@ -1,0 +1,104 @@
+<section class="catalogue">
+
+  <!-- ── Sidebar filters ── -->
+  <aside class="filters">
+    <h2 class="filters-heading">Filters</h2>
+
+    <div class="filter-group">
+      <label class="filter-label">Search</label>
+      <input
+        type="search"
+        class="filter-input"
+        placeholder="Search products…"
+        [value]="searchTerm()"
+        (input)="onSearch($any($event.target).value)"
+      />
+    </div>
+
+    <div class="filter-group">
+      <label class="filter-label">Category</label>
+      <div class="chip-list">
+        <button
+          *ngFor="let cat of categories"
+          class="chip"
+          [class.active]="selectedCategory() === cat"
+          (click)="onCategory(cat)"
+        >{{ cat }}</button>
+      </div>
+    </div>
+
+    <div class="filter-group">
+      <label class="filter-label">
+        Price range: ₹{{ minPrice() | number:'1.0-0' }} – ₹{{ maxPrice() | number:'1.0-0' }}
+      </label>
+      <input type="range" min="0" max="10000" step="100"
+        [value]="minPrice()" (input)="onMinPrice($event)" class="range-slider" />
+      <input type="range" min="0" max="10000" step="100"
+        [value]="maxPrice()" (input)="onMaxPrice($event)" class="range-slider" />
+    </div>
+
+    <div class="filter-group checkbox-group">
+      <input type="checkbox" id="inStock"
+        [checked]="inStockOnly()"
+        (change)="onInStockToggle($event)" />
+      <label for="inStock">In stock only</label>
+    </div>
+  </aside>
+
+  <!-- ── Main content ── -->
+  <main class="catalogue-main">
+
+    <div class="main-header">
+      <h1 class="page-title">Products</h1>
+      <!-- <span class="count-badge" *ngIf="!loading()">
+        {{ displayProducts().length }} results
+      </span> -->
+    </div>
+
+    <!-- Loading skeletons -->
+    <div class="product-grid" *ngIf="loading()">
+      <div *ngFor="let s of skeletons" class="skeleton-card">
+        <div class="skel-img"></div>
+        <div class="skel-line"></div>
+        <div class="skel-line short"></div>
+        <div class="skel-line shorter"></div>
+      </div>
+    </div>
+
+    <!-- Error state -->
+    <div class="error-state" *ngIf="!loading() && storeErr()">
+      <p class="error-icon">⚠️</p>
+      <h3>Something went wrong</h3>
+      <p>{{ storeErr() }}</p>
+      <button class="btn-retry" (click)="retry()">Try again</button>
+    </div>
+
+    <!-- Empty state -->
+    <div class="empty-state"
+         *ngIf="!loading() && !storeErr() && displayProducts().length === 0">
+      <p class="empty-icon">🔍</p>
+      <h3>No products found</h3>
+      <p>Try adjusting your search or filters.</p>
+      <button class="btn-retry" (click)="retry()">Reset & retry</button>
+    </div>
+
+    <!-- Product grid -->
+    <div class="product-grid"
+         *ngIf="!loading() && !storeErr() && displayProducts().length > 0">
+      <app-product-card
+        *ngFor="let p of displayProducts(); trackBy: trackById"
+        [product]="p"
+      />
+    </div>
+
+    <!-- Pagination -->
+    <nav class="pagination" *ngIf="totalPages() > 1 && !loading()">
+      <button [disabled]="currentPage() === 1"
+              (click)="goToPage(currentPage() - 1)">← Prev</button>
+      <span>Page {{ currentPage() }} of {{ totalPages() }}</span>
+      <button [disabled]="currentPage() === totalPages()"
+              (click)="goToPage(currentPage() + 1)">Next →</button>
+    </nav>
+
+  </main>
+</section>

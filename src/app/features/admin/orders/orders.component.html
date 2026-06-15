@@ -1,0 +1,219 @@
+<div class="orders-container">
+
+  <h2 class="title">Orders</h2>
+
+  <!-- TOOLBAR -->
+  <div class="toolbar">
+
+    <!-- STATUS FILTER -->
+    <div class="select-wrapper">
+      <select
+        [value]="statusFilter()"
+        (change)="onStatusChange($any($event.target).value)"
+      >
+        <option value="All">All Status</option>
+        <option value="Pending">Pending</option>
+        <option value="Confirmed">Confirmed</option>
+        <option value="Cancelled">Cancelled</option>
+      </select>
+
+      <span class="custom-arrow">▾</span>
+    </div>
+
+    <!-- DATE FILTER -->
+    <div class="date-range-filter">
+
+      <span class="filter-label">Date Range</span>
+
+      <input
+        type="date"
+        class="date-input"
+        [value]="startDate()"
+        (input)="startDate.set($any($event.target).value)"
+      />
+
+      <span class="separator">→</span>
+
+      <input
+        type="date"
+        class="date-input"
+        [value]="endDate()"
+        (input)="endDate.set($any($event.target).value)"
+      />
+
+      <button
+        *ngIf="startDate() || endDate()"
+        type="button"
+        class="clear-filter-btn"
+        (click)="clearDateFilter()"
+      >
+        ✕
+      </button>
+
+    </div>
+
+  </div>
+
+  <!-- TABLE -->
+  <div class="table-wrapper">
+
+    <table class="orders-table">
+
+      <thead>
+        <tr>
+          <th class="sortable" (click)="onSort('id')">
+            ID <span>{{ getSortIcon('id') }}</span>
+          </th>
+
+          <th class="sortable" (click)="onSort('customerName')">
+            Customer <span>{{ getSortIcon('customerName') }}</span>
+          </th>
+
+          <th class="sortable" (click)="onSort('products')">
+            Product(s) <span>{{ getSortIcon('products') }}</span>
+          </th>
+
+          <th class="sortable" (click)="onSort('total')">
+            Total <span>{{ getSortIcon('total') }}</span>
+          </th>
+
+          <th class="sortable" (click)="onSort('status')">
+            Status <span>{{ getSortIcon('status') }}</span>
+          </th>
+
+          <th class="sortable" (click)="onSort('date')">
+            Date <span>{{ getSortIcon('date') }}</span>
+          </th>
+        </tr>
+      </thead>
+
+      <tbody>
+
+        <tr
+          *ngFor="let o of orders(); trackBy: trackById"
+          (click)="onRowClick($event, o)"
+        >
+          <td>{{ o.id }}</td>
+          <td>{{ o.customerName }}</td>
+
+          <!-- PRODUCTS -->
+          <td>
+            <span *ngFor="let i of o.items; let last = last">
+              {{ i.productName }}<span *ngIf="!last">, </span>
+            </span>
+          </td>
+
+          <!-- TOTAL -->
+          <td>
+            {{ getOrderTotal(o) }}
+          </td>
+
+          <!-- STATUS -->
+          <td>
+            <span
+              class="status-badge"
+              [ngClass]="{
+                pending: o.status === 'Pending',
+                confirmed: o.status === 'Confirmed',
+                cancelled: o.status === 'Cancelled'
+              }"
+            >
+              {{ o.status }}
+            </span>
+          </td>
+
+          <!-- DATE -->
+          <td>
+            {{ o.date | date:'dd MMM yyyy' }}
+          </td>
+
+        </tr>
+
+        <tr *ngIf="orders().length === 0">
+          <td colspan="6">No Orders Found</td>
+        </tr>
+
+      </tbody>
+
+    </table>
+
+  </div>
+
+  <!-- PAGINATION -->
+  <div class="pagination">
+
+    <button
+      (click)="prevPage()"
+      [disabled]="currentPage() === 1"
+      class="page-btn"
+    >
+      Prev
+    </button>
+
+    <span>Page {{ currentPage() }}</span>
+
+    <button
+      (click)="nextPage()"
+      [disabled]="currentPage() === totalPages()"
+      class="page-btn"
+    >
+      Next
+    </button>
+
+  </div>
+
+  <!-- SIDE PANEL -->
+  <div class="side-panel" [class.open]="selectedOrder()">
+
+    <div class="panel-content" *ngIf="selectedOrder() as order">
+
+      <div class="panel-header">
+        <h3>Order #{{ order.id }}</h3>
+        <button class="close-btn" (click)="closePanel()">✕</button>
+      </div>
+
+      <div class="info-card">
+        <p><strong>Customer:</strong> {{ order.customerName }}</p>
+        <p><strong>Total:</strong> {{ getOrderTotal(order) }}</p>
+        <p><strong>Price:</strong> {{ getOrderPrice(order) }}</p>
+
+        <p>
+          <strong>Status:</strong>
+          <span class="status-pill" [ngClass]="order.status.toLowerCase()">
+            {{ order.status }}
+          </span>
+        </p>
+
+        <p><strong>Date:</strong> {{ order.date | date:'dd MMM yyyy' }}</p>
+      </div>
+
+      <div class="section-title">Items</div>
+
+      <div class="items-card">
+        <table>
+          <tr *ngFor="let item of order.items">
+            <td>{{ item.productName }}</td>
+            <td>x{{ item.quantity }}</td>
+            <td>₹{{ item.price }}</td>
+          </tr>
+        </table>
+      </div>
+
+      <div class="section-title">Update Status</div>
+
+      <div class="status-update">
+        <select
+          [value]="order.status"
+          (change)="updateStatus($any($event.target).value)"
+        >
+          <option value="Pending">Pending</option>
+          <option value="Confirmed">Confirmed</option>
+          <option value="Cancelled">Cancelled</option>
+        </select>
+      </div>
+
+    </div>
+
+  </div>
+
+</div>

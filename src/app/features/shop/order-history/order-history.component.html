@@ -1,0 +1,48 @@
+<div class="history-page">
+  <h1 class="page-title">Order History</h1>
+
+  <!-- Loading -->
+  <div *ngIf="loading()" class="skeleton-list">
+    <div *ngFor="let s of skeletons" class="skel-card">
+      <div class="skel-line wide"></div>
+      <div class="skel-line medium"></div>
+      <div class="skel-line short"></div>
+    </div>
+  </div>
+
+  <!-- Empty state -->
+  <div *ngIf="!loading() && orders().length === 0" class="empty-state">
+    <span class="empty-icon">📦</span>
+    <h3>No orders yet</h3>
+    <p>Your placed orders will appear here.</p>
+    <a routerLink="/shop" class="btn-shop">Start Shopping</a>
+  </div>
+
+  <!-- Order cards -->
+  <div *ngIf="!loading() && orders().length > 0" class="order-list">
+    <div *ngFor="let order of orders(); trackBy: trackById" class="order-card">
+
+      <div class="order-head">
+        <div>
+          <p class="order-id">{{ order.id }}</p>
+          <p class="order-date">{{ order.date }}</p>
+        </div>
+        <span class="status-pill" [class]="order.status.toLowerCase()">
+          {{ order.status }}
+        </span>
+      </div>
+
+      <div class="order-items">
+        <div *ngFor="let item of order.items" class="order-line">
+          <span>{{ item.productName }} × {{ item.quantity }}</span>
+          <span>₹{{ item.price | number:'1.0-0' }}</span>
+        </div>
+      </div>
+
+      <div class="order-foot">
+        <span class="total-label">Total</span>
+        <span class="total-val">₹{{ order.total | number:'1.0-0' }}</span>
+      </div>
+    </div>
+  </div>
+</div>

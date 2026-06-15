@@ -1,0 +1,41 @@
+<nav class="navbar">
+
+  <div class="left">
+    <a class="brand" routerLink="/">PlatformCommons</a>
+
+    <ng-container *ngIf="auth.isAuthenticated()">
+      <a *ngIf="auth.role() === 'user'"
+         routerLink="/shop" routerLinkActive="active" [routerLinkActiveOptions]="{exact: true}">
+        Shop
+      </a>
+      <a *ngIf="auth.role() === 'user'"
+         routerLink="/shop/order-history" routerLinkActive="active">
+        Orders
+      </a>
+    </ng-container>
+  </div>
+
+  <div class="right">
+
+    <ng-container *ngIf="auth.isAuthenticated(); else guest">
+
+      <!-- Cart icon with live count -->
+      <a *ngIf="auth.role() === 'user'"
+         routerLink="/shop/checkout/step/1"
+         class="cart-link"
+         aria-label="Cart">
+        🛒
+        <span class="cart-count" *ngIf="cart.count() > 0">{{ cart.count() }}</span>
+      </a>
+
+      <button class="btn logout" (click)="logout()">Logout</button>
+    </ng-container>
+
+    <ng-template #guest>
+      <button class="btn login" (click)="goLogin()">Login</button>
+      <button class="btn signup" (click)="goSignup()">Signup</button>
+    </ng-template>
+
+  </div>
+
+</nav>

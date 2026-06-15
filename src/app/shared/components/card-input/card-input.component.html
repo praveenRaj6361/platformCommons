@@ -1,0 +1,29 @@
+<div
+  class="card-wrap"
+  [class.valid]="luhnValid() === true"
+  [class.invalid]="touched() && luhnValid() === false"
+>
+  <span class="card-icon" aria-hidden="true">💳</span>
+
+  <input
+    type="text"
+    inputmode="numeric"
+    [value]="displayValue()"
+    (input)="onInput($event)"
+    (blur)="onBlur()"
+    placeholder="1234 5678 9012 3456"
+    maxlength="19"
+    class="card-field"
+    autocomplete="cc-number"
+    aria-label="Card number"
+  />
+
+  <span class="status" *ngIf="luhnValid() !== null" aria-live="polite">
+    {{ luhnValid() ? '✅' : '❌' }}
+  </span>
+</div>
+
+<p class="card-error" role="alert"
+   *ngIf="touched() && luhnValid() === false">
+  Enter a valid 16-digit card number.
+</p>

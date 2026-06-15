@@ -1,0 +1,156 @@
+
+
+<div class="analytics-page">
+
+  <h1 class="page-title">Analytics</h1>
+
+  <!-- ═══════════════════════════════════════ -->
+  <!-- KEY METRIC CARDS -->
+  <!-- ═══════════════════════════════════════ -->
+  <div class="metrics-grid">
+
+    <div class="metric-card">
+      <span class="metric-label">Total products</span>
+      <span class="metric-value">{{ totalProducts() | number }}</span>
+    </div>
+
+    <div class="metric-card">
+      <span class="metric-label">Total orders</span>
+      <span class="metric-value">{{ totalOrders() | number }}</span>
+    </div>
+
+    <div class="metric-card">
+      <span class="metric-label">Total revenue</span>
+      <span class="metric-value">₹{{ totalRevenue() | number:'1.0-0' }}</span>
+    </div>
+
+    <div class="metric-card">
+      <span class="metric-label">Avg order value</span>
+      <span class="metric-value">₹{{ avgOrderValue() | number:'1.0-0' }}</span>
+    </div>
+
+    <div class="metric-card warn" [class.alert]="lowStockCount() > 0">
+      <span class="metric-label">Low stock items</span>
+      <span class="metric-value">{{ lowStockCount() }}</span>
+    </div>
+
+    <div class="metric-card danger" [class.alert]="outOfStockCount() > 0">
+      <span class="metric-label">Out of stock</span>
+      <span class="metric-value">{{ outOfStockCount() }}</span>
+    </div>
+
+  </div>
+
+  <!-- ═══════════════════════════════════════ -->
+  <!-- TWO-COLUMN: ORDER STATUS + CATEGORY BREAKDOWN -->
+  <!-- ═══════════════════════════════════════ -->
+  <div class="charts-row">
+
+    <!-- ORDER STATUS BREAKDOWN -->
+    <div class="panel">
+      <h2 class="panel-title">Order status breakdown</h2>
+
+      <div *ngIf="ordersLoading()" class="skeleton-block">
+        <div class="skel-bar" *ngFor="let s of [1,2,3]"></div>
+      </div>
+
+      <div *ngIf="!ordersLoading() && statusBreakdown().length === 0" class="empty-note">
+        No orders yet.
+      </div>
+
+      <div *ngIf="!ordersLoading() && statusBreakdown().length > 0" class="bar-list">
+        <div
+          *ngFor="let s of statusBreakdown(); trackBy: trackByStatus"
+          class="bar-row"
+        >
+          <div class="bar-row-header">
+            <span class="bar-label" [class]="'status-' + s.status.toLowerCase()">
+              {{ s.status }}
+            </span>
+            <span class="bar-count">{{ s.count }} ({{ s.percentage }}%)</span>
+          </div>
+          <div class="bar-track">
+            <div
+              class="bar-fill"
+              [class]="'fill-' + s.status.toLowerCase()"
+              [style.width.%]="s.percentage"
+            ></div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- CATEGORY BREAKDOWN -->
+    <div class="panel">
+      <h2 class="panel-title">Products by category</h2>
+
+      <div *ngIf="productsLoading()" class="skeleton-block">
+        <div class="skel-bar" *ngFor="let s of [1,2,3,4]"></div>
+      </div>
+
+      <div *ngIf="!productsLoading() && categoryBreakdown().length === 0" class="empty-note">
+        No product data available.
+      </div>
+
+      <div *ngIf="!productsLoading() && categoryBreakdown().length > 0" class="bar-list">
+        <div
+          *ngFor="let c of categoryBreakdown(); trackBy: trackByCategory"
+          class="bar-row"
+        >
+          <div class="bar-row-header">
+            <span class="bar-label category-label">{{ c.category }}</span>
+            <span class="bar-count">{{ c.count }} ({{ c.percentage }}%)</span>
+          </div>
+          <div class="bar-track">
+            <div class="bar-fill fill-category" [style.width.%]="c.percentage"></div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+  </div>
+
+  <!-- ═══════════════════════════════════════ -->
+  <!-- TWO-COLUMN: TOP CUSTOMERS + RECENT ORDERS -->
+  <!-- ═══════════════════════════════════════ -->
+  <div class="charts-row">
+
+    <!-- TOP CUSTOMERS -->
+    <div class="panel">
+      <h2 class="panel-title">Top customers</h2>
+
+      <div *ngIf="ordersLoading()" class="skeleton-block">
+        <div class="skel-line" *ngFor="let s of [1,2,3,4,5]"></div>
+      </div>
+
+      <div *ngIf="!ordersLoading() && topCustomers().length === 0" class="empty-note">
+        No customer data yet.
+      </div>
+
+      <table *ngIf="!ordersLoading() && topCustomers().length > 0" class="data-table">
+        <thead>
+          <tr>
+            <th>Customer</th>
+            <th>Orders</th>
+            <th>Total spent</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr *ngFor="let c of topCustomers(); trackBy: trackByCustomer">
+            <td>{{ c.name }}</td>
+            <td>{{ c.count }}</td>
+            <td>₹{{ c.total | number:'1.0-0' }}</td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+
+    <!-- RECENT ORDERS -->
+    <div class="panel">
+      <h2 class="panel-title">Recent orders</h2>
+
+      <div *ngIf="ordersLoading()" class="skeleton-block">
+        <div class="skel-line" *ngFor="let s of [1,2,3,4,5]"></div>
+      </div>
+
+      <div *ngIf="!ordersLoading() && recentOrders().length === 0" class="empty-note">

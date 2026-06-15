@@ -1,0 +1,245 @@
+<div class="products-container">
+
+  <h2 class="title">Products</h2>
+
+  <!-- Toolbar -->
+  <div class="toolbar">
+
+    <!-- Search -->
+    <input
+      class="search-box"
+      placeholder="Search products..."
+      [value]="store.search()"
+      (input)="onSearch($event)"
+    />
+
+    <!-- Category Filter -->
+    <select
+      (change)="onCategory($event)"
+      [value]="store.category()"
+    >
+      <option value="all">All Categories</option>
+      <option value="smartphones">Smartphones</option>
+      <option value="laptops">Laptops</option>
+      <option value="fragrances">Fragrances</option>
+      <option value="skincare">Skincare</option>
+      <option value="groceries">Groceries</option>
+    </select>
+
+    <!-- Add Product -->
+    <button
+      class="add-btn"
+      (click)="openAddForm()"
+    >
+      + Add Product
+    </button>
+
+  </div>
+
+  <!-- TABLE -->
+  <div class="table-wrapper">
+
+    <table class="products-table">
+
+      <thead>
+        <tr>
+
+          <th (click)="sort('title')">
+            Name <span>{{ getSortIcon('title') }}</span>
+          </th>
+
+          <th (click)="sort('category')">
+            Category <span>{{ getSortIcon('category') }}</span>
+          </th>
+
+          <th (click)="sort('price')">
+            Price <span>{{ getSortIcon('price') }}</span>
+          </th>
+
+          <th (click)="sort('stock')">
+            Stock <span>{{ getSortIcon('stock') }}</span>
+          </th>
+
+          <th>
+            Actions
+          </th>
+
+        </tr>
+      </thead>
+
+      <tbody>
+
+        <!-- No Data -->
+        <tr
+          *ngIf="sortedProducts().length === 0"
+          class="no-data-row"
+        >
+          <td colspan="5">
+            No Data Found
+          </td>
+        </tr>
+
+        <!-- Data Rows -->
+        <tr *ngFor="let p of sortedProducts()">
+
+          <td>{{ p.title }}</td>
+
+          <td>{{ p.category }}</td>
+
+          <td>₹{{ p.price }}</td>
+
+          <td>
+            <span
+              class="stock-badge"
+              [class.low]="p.stock < 5"
+            >
+              {{ p.stock }}
+            </span>
+          </td>
+
+          <td class="actions">
+
+            <button
+              class="edit-btn"
+              (click)="openEditForm(p)"
+            >
+              Edit
+            </button>
+
+            <button
+              class="danger"
+              (click)="openDeleteModal(p.id)"
+            >
+              Delete
+            </button>
+
+          </td>
+
+        </tr>
+
+      </tbody>
+
+    </table>
+
+  </div>
+
+  <!-- PAGINATION -->
+  <div class="pagination">
+
+    <button
+      (click)="prevPage()"
+      class="page-btn"
+    >
+      Prev
+    </button>
+
+    <span class="page-info">
+      Page {{ currentPage }}
+    </span>
+
+    <button
+      (click)="nextPage()"
+      class="page-btn"
+    >
+      Next
+    </button>
+
+  </div>
+
+</div>
+
+<!-- ================================= -->
+<!-- ADD / EDIT PRODUCT MODAL -->
+<!-- ================================= -->
+
+<div
+  class="modal"
+  *ngIf="isFormOpen()"
+>
+
+  <div class="modal-content">
+
+    <h3>
+      {{ isEditMode() ? 'Edit Product' : 'Add Product' }}
+    </h3>
+
+    <input
+      [ngModel]="formProduct().title"
+      (ngModelChange)="updateField('title', $event)"
+      placeholder="Title"
+    />
+
+    <input
+      [ngModel]="formProduct().category"
+      (ngModelChange)="updateField('category', $event)"
+      placeholder="Category"
+    />
+
+    <input
+      type="number"
+      [ngModel]="formProduct().price"
+      (ngModelChange)="updateField('price', $event)"
+      placeholder="Price"
+    />
+
+    <input
+      type="number"
+      [ngModel]="formProduct().stock"
+      (ngModelChange)="updateField('stock', $event)"
+      placeholder="Stock"
+    />
+
+    <div class="modal-actions">
+
+      <button (click)="saveProduct()">
+        Save
+      </button>
+
+      <button (click)="closeForm()">
+        Cancel
+      </button>
+
+    </div>
+
+  </div>
+
+</div>
+
+<!-- ================================= -->
+<!-- DELETE CONFIRMATION MODAL -->
+<!-- ================================= -->
+
+<div
+  class="modal"
+  *ngIf="isDeleteModalOpen()"
+>
+
+  <div class="modal-content delete-modal">
+
+    <h2>Delete Product</h2>
+
+    <h4>
+      Are you sure you want to delete this product?
+    </h4>
+
+    <div class="modal-actions">
+
+      <button
+        class="delete-confirm-btn"
+        (click)="confirmDelete()"
+      >
+        Yes Delete
+      </button>
+
+      <button
+        class="cancel-btn"
+        (click)="closeDeleteModal()"
+      >
+        No
+      </button>
+
+    </div>
+
+  </div>
+
+</div>

@@ -1,0 +1,445 @@
+/* =========================
+   SHIMMER MIXIN
+========================= */
+@mixin shimmer {
+  background: linear-gradient(
+    90deg,
+    #f3f4f6 25%,
+    #e5e7eb 50%,
+    #f3f4f6 75%
+  );
+  background-size: 200% 100%;
+  animation: shimmer 1.4s infinite;
+}
+
+@keyframes shimmer {
+  0% {
+    background-position: 200% 0;
+  }
+
+  100% {
+    background-position: -200% 0;
+  }
+}
+
+/* =========================
+   CATALOGUE LAYOUT
+========================= */
+
+.catalogue {
+  background: #f8f8fc;
+  min-height: 100vh;
+  padding: 1.5rem;
+  box-sizing: border-box;
+}
+
+/* =========================
+   SIDEBAR (FIXED)
+========================= */
+
+.filters {
+  position: fixed;
+  top: 62px;
+  left: 0;
+
+  width: 290px;
+  height: calc(100vh - 62px);
+
+  background: #fff;
+
+  padding: 1.5rem;
+  box-sizing: border-box;
+
+  border-right: 1px solid #e5e7eb;
+
+  box-shadow:
+    0 10px 25px rgba(0, 0, 0, 0.05),
+    0 2px 10px rgba(0, 0, 0, 0.03);
+
+  overflow-y: auto;
+  overflow-x: hidden;
+
+  z-index: 100;
+
+  /* Hide scrollbar */
+  scrollbar-width: none;
+  -ms-overflow-style: none;
+
+  &::-webkit-scrollbar {
+    display: none;
+  }
+}
+
+.filters-heading {
+  position: sticky;
+  top: -1.5rem;
+
+  background: #fff;
+
+  font-size: 1.15rem;
+  font-weight: 800;
+
+  color: #111827;
+
+  margin: 0 0 1.5rem;
+  padding-bottom: 1rem;
+
+  border-bottom: 1px solid #f1f5f9;
+
+  z-index: 5;
+}
+
+.filter-group {
+  margin-bottom: 1.5rem;
+}
+
+.filter-label {
+  display: block;
+
+  font-size: 0.75rem;
+  font-weight: 700;
+
+  color: #6b7280;
+
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+
+  margin-bottom: 0.75rem;
+}
+
+/* =========================
+   SEARCH INPUT
+========================= */
+
+.filter-input {
+  width: 100%;
+
+  padding: 0.8rem 1rem;
+
+  border: 1.5px solid #e5e7eb;
+  border-radius: 10px;
+
+  font-size: 0.9rem;
+
+  outline: none;
+
+  transition: all 0.2s ease;
+
+  &:focus {
+    border-color: #6366f1;
+    box-shadow: 0 0 0 4px rgba(99, 102, 241, 0.12);
+  }
+}
+
+/* =========================
+   CATEGORY CHIPS
+========================= */
+
+.chip-list {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px;
+}
+
+.chip {
+  padding: 8px 14px;
+
+  border-radius: 999px;
+
+  border: 1px solid #e5e7eb;
+  background: #f9fafb;
+
+  font-size: 0.8rem;
+  font-weight: 600;
+
+  color: #374151;
+
+  cursor: pointer;
+
+  transition: all 0.25s ease;
+
+  &:hover:not(.active) {
+    border-color: #6366f1;
+    background: #eef2ff;
+    color: #4f46e5;
+
+    transform: translateY(-2px);
+  }
+
+  &.active {
+    background: #4f46e5;
+    border-color: #4f46e5;
+    color: #fff;
+
+    box-shadow: 0 6px 16px rgba(79, 70, 229, 0.25);
+  }
+}
+
+/* =========================
+   RANGE SLIDER
+========================= */
+
+.range-slider {
+  width: 100%;
+  margin: 8px 0;
+  accent-color: #4f46e5;
+}
+
+/* =========================
+   CHECKBOX
+========================= */
+
+.checkbox-group {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+
+  padding: 0.85rem;
+
+  background: #f9fafb;
+  border-radius: 10px;
+}
+
+.checkbox-group input[type='checkbox'] {
+  width: 18px;
+  height: 18px;
+  accent-color: #4f46e5;
+}
+
+.checkbox-group label {
+  font-size: 0.9rem;
+  color: #374151;
+  font-weight: 500;
+}
+
+/* =========================
+   MAIN CONTENT
+========================= */
+
+.catalogue-main {
+  margin-left: 310px;
+  min-width: 0;
+}
+
+.main-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-top: 74px;
+  margin-bottom: 1.5rem;
+}
+
+.page-title {
+  font-size: 2rem;
+  font-weight: 800;
+  color: #111827;
+  margin: 0;
+}
+
+.count-badge {
+  padding: 0.4rem 0.9rem;
+
+  background: #fff;
+
+  border: 1px solid #e5e7eb;
+  border-radius: 999px;
+
+  font-size: 0.85rem;
+  font-weight: 600;
+
+  color: #6b7280;
+}
+
+/* =========================
+   PRODUCT GRID
+========================= */
+
+.product-grid {
+  display: grid;
+
+  grid-template-columns:
+    repeat(auto-fill, minmax(220px, 1fr));
+
+  gap: 1.5rem;
+}
+
+/* =========================
+   SKELETON
+========================= */
+
+.skeleton-card {
+  background: #fff;
+  border-radius: 16px;
+  overflow: hidden;
+
+  box-shadow:
+    0 4px 12px rgba(0, 0, 0, 0.05);
+
+  padding-bottom: 1rem;
+
+  .skel-img {
+    height: 180px;
+    @include shimmer;
+  }
+
+  .skel-line {
+    height: 12px;
+    margin: 12px 1rem 0;
+
+    border-radius: 999px;
+
+    @include shimmer;
+
+    &.short {
+      width: 65%;
+    }
+
+    &.shorter {
+      width: 42%;
+      margin-top: 8px;
+    }
+  }
+}
+
+/* =========================
+   ERROR / EMPTY
+========================= */
+
+.error-state,
+.empty-state {
+  background: #fff;
+
+  border-radius: 18px;
+
+  text-align: center;
+
+  padding: 4rem 2rem;
+
+  color: #6b7280;
+
+  box-shadow:
+    0 4px 12px rgba(0, 0, 0, 0.05);
+
+  .error-icon,
+  .empty-icon {
+    font-size: 3rem;
+    margin-bottom: 1rem;
+  }
+
+  h3 {
+    color: #111827;
+    margin-bottom: 0.5rem;
+  }
+}
+
+/* =========================
+   BUTTON
+========================= */
+
+.btn-retry {
+  margin-top: 1rem;
+
+  padding: 0.8rem 1.5rem;
+
+  background: #4f46e5;
+  color: #fff;
+
+  border: none;
+  border-radius: 10px;
+
+  font-size: 0.9rem;
+  font-weight: 600;
+
+  cursor: pointer;
+
+  transition: all 0.2s ease;
+
+  &:hover {
+    background: #4338ca;
+    transform: translateY(-2px);
+  }
+}
+
+/* =========================
+   PAGINATION
+========================= */
+
+.pagination {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+
+  gap: 1rem;
+
+  margin-top: 2.5rem;
+
+  button {
+    padding: 0.7rem 1.2rem;
+
+    background: #4f46e5;
+    color: #fff;
+
+    border: none;
+    border-radius: 10px;
+
+    cursor: pointer;
+
+    &:hover:not(:disabled) {
+      background: #4338ca;
+    }
+
+    &:disabled {
+      background: #e5e7eb;
+      color: #9ca3af;
+      cursor: not-allowed;
+    }
+  }
+
+  span {
+    color: #374151;
+    font-weight: 500;
+  }
+}
+
+/* =========================
+   MOBILE
+========================= */
+
+@media (max-width: 992px) {
+  .filters {
+    position: relative;
+    top: auto;
+    left: auto;
+
+    width: 100%;
+    height: auto;
+
+    overflow: visible;
+  }
+
+  .catalogue-main {
+    margin-left: 0;
+    margin-top: 1.5rem;
+  }
+}
+
+@media (max-width: 768px) {
+  .catalogue {
+    padding: 1rem;
+  }
+
+  .page-title {
+    font-size: 1.6rem;
+  }
+
+  .main-header {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 0.75rem;
+  }
+
+  .product-grid {
+    grid-template-columns:
+      repeat(auto-fill, minmax(160px, 1fr));
+  }
+}

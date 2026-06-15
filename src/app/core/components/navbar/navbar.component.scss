@@ -1,0 +1,252 @@
+/* =========================
+   NAVBAR (FIXED PREMIUM STYLE)
+========================= */
+.navbar {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+
+  width: 100%;
+  height: 64px;
+
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+
+  padding: 0 26px;
+  box-sizing: border-box;
+
+  z-index: 9999;
+
+  background: rgba(255, 255, 255, 0.88);
+  backdrop-filter: blur(10px);
+  -webkit-backdrop-filter: blur(10px);
+
+  border-bottom: 1px solid #e5e7eb;
+
+  box-shadow: 0 6px 20px rgba(0, 0, 0, 0.04);
+}
+
+/* =========================
+   LEFT SECTION (brand + nav links)
+========================= */
+.left {
+  display: flex;
+  align-items: center;
+  gap: 24px;
+}
+
+/* =========================
+   BRAND
+========================= */
+.brand {
+  font-size: 20px;
+  font-weight: 700;
+  letter-spacing: 0.4px;
+  cursor: pointer;
+  text-decoration: none;
+
+  background: linear-gradient(
+    90deg,
+    #111827,
+    #6366f1,
+    #06b6d4,
+    #8b5cf6,
+    #111827
+  );
+
+  background-size: 250% 100%;
+
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+
+  animation: brandGlowMove 5s linear infinite;
+
+  transition: transform 0.2s ease;
+}
+
+.brand:hover {
+  transform: translateY(-1px);
+}
+
+@keyframes brandGlowMove {
+  0% {
+    background-position: 0% 50%;
+  }
+
+  100% {
+    background-position: 100% 50%;
+  }
+}
+
+/* =========================
+   NAV LINKS
+========================= */
+.left a:not(.brand) {
+  font-size: 14px;
+  font-weight: 500;
+  color: #374151;
+  text-decoration: none;
+
+  padding: 6px 2px;
+
+  border-bottom: 2px solid transparent;
+
+  transition:
+    color 0.18s ease,
+    border-color 0.18s ease;
+}
+
+.left a:not(.brand):hover,
+.left a:not(.brand).active {
+  color: #6366f1;
+  border-bottom-color: #6366f1;
+}
+
+/* =========================
+   RIGHT SECTION
+========================= */
+.right {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+/* =========================
+   CART ICON
+========================= */
+.cart-link {
+  position: relative;
+
+  display: inline-flex;
+  align-items: center;
+
+  padding: 4px;
+
+  border-radius: 8px;
+
+  text-decoration: none;
+  font-size: 20px;
+  line-height: 1;
+
+  transition:
+    background 0.18s ease,
+    transform 0.18s ease;
+}
+
+.cart-link:hover {
+  background: #f3f4f6;
+  transform: translateY(-1px);
+}
+
+.cart-count {
+  position: absolute;
+  top: -6px;
+  right: -8px;
+
+  min-width: 18px;
+  height: 18px;
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  padding: 0 4px;
+
+  border-radius: 999px;
+
+  background: #ef4444;
+  color: #fff;
+
+  font-size: 11px;
+  font-weight: 700;
+
+  box-shadow: 0 1px 4px rgba(239, 68, 68, 0.4);
+}
+
+/* =========================
+   BUTTONS
+========================= */
+.right button {
+  padding: 8px 14px;
+
+  border-radius: 10px;
+  border: 1px solid #e5e7eb;
+
+  background: #fff;
+  color: #374151;
+
+  font-size: 13px;
+  font-weight: 500;
+
+  cursor: pointer;
+
+  transition: all 0.2s ease;
+}
+
+.right button:hover {
+  background: #f9fafb;
+  transform: translateY(-1px);
+}
+
+.right button:active {
+  transform: scale(0.97);
+}
+
+/* LOGIN */
+.right button.login {
+  border-color: #d1d5db;
+}
+
+/* SIGNUP */
+.right button.signup {
+  background: #111827;
+  color: #fff;
+  border-color: #111827;
+}
+
+.right button.signup:hover {
+  background: #1f2937;
+}
+
+/* LOGOUT */
+.right button.logout {
+  background: #fff5f5;
+  border: 2px solid #e5baba;
+  color: #b91c1c;
+}
+
+.right button.logout:hover {
+  background: #fee2e2;
+}
+
+/* =========================
+   MOBILE
+========================= */
+@media (max-width: 600px) {
+  .navbar {
+    padding: 0 14px;
+  }
+
+  .left {
+    gap: 14px;
+  }
+
+  .left a:not(.brand) {
+    font-size: 12px;
+  }
+
+  .brand {
+    font-size: 15px;
+  }
+
+  .right button {
+    padding: 6px 10px;
+    font-size: 12px;
+  }
+
+  .cart-link {
+    font-size: 17px;
+  }
+}

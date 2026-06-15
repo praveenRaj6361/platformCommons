@@ -1,0 +1,84 @@
+<div class="detail-page" *ngIf="product() as p">
+
+  <a routerLink="/shop" class="back-link">← Back to catalogue</a>
+
+  <div class="detail-layout">
+
+    <!-- Images -->
+    <div class="detail-images">
+      <img [src]="p.thumbnail" [alt]="p.title" class="main-img" />
+      <div class="thumb-row" *ngIf="p.images?.length">
+        <img
+          *ngFor="let img of p.images.slice(0, 4)"
+          [src]="img" [alt]="p.title"
+          class="thumb"
+        />
+      </div>
+    </div>
+
+    <!-- Info -->
+    <div class="detail-info">
+      <span class="category-tag">{{ p.category }}</span>
+      <h1 class="product-title">{{ p.title }}</h1>
+      <p class="product-brand" *ngIf="p.brand">by {{ p.brand }}</p>
+
+      <div class="rating-row">
+        <span class="stars">{{ '★'.repeat(Math.round(p.rating)) }}</span>
+        <span class="rating-num">{{ p.rating | number:'1.1-1' }}</span>
+      </div>
+
+      <p class="product-price">₹{{ p.price | number:'1.0-0' }}</p>
+
+      <span class="discount-badge" *ngIf="p.discountPercentage">
+        {{ p.discountPercentage | number:'1.0-0' }}% off
+      </span>
+
+      <p class="product-desc">{{ p.description }}</p>
+
+      <div
+        class="stock-info"
+        [class.danger]="p.stock > 0 && p.stock <= 5"
+        [class.out]="p.stock === 0"
+      >
+        {{
+          p.stock === 0
+            ? 'Out of stock'
+            : p.stock <= 5
+              ? 'Only ' + p.stock + ' left!'
+              : p.stock + ' in stock'
+        }}
+      </div>
+
+      <!-- Quantity selector -->
+      <div class="qty-row" *ngIf="!outOfStock()">
+        <button class="qty-btn" (click)="decrement()" [disabled]="quantity() <= 1">−</button>
+        <span class="qty-val">{{ quantity() }}</span>
+        <button class="qty-btn" (click)="increment()" [disabled]="quantity() >= maxQty()">+</button>
+      </div>
+
+      <!-- Add to cart -->
+      <button
+        *ngIf="!outOfStock()"
+        class="btn-add"
+        [class.added]="addedToCart()"
+        (click)="addToCart()"
+      >
+        {{ addedToCart() ? '✓ Added to Cart' : 'Add to Cart' }}
+      </button>
+
+      <!-- Notify me (out of stock) -->
+      <button *ngIf="outOfStock()" class="btn-notify" disabled>
+        🔔 Notify Me When Available
+      </button>
+    </div>
+  </div>
+
+  <!-- Related products -->
+  <section class="related" *ngIf="related().length > 0">
+    <h2 class="related-title">Related Products</h2>
+    <div class="related-grid">
+      <app-product-card *ngFor="let rp of related()" [product]="rp" />
+    </div>
+  </section>
+
+</div>

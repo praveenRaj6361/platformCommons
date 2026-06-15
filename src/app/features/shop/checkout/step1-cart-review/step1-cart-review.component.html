@@ -1,0 +1,66 @@
+<div class="checkout-page">
+
+  <div class="step-header">
+    <div class="step-trail">
+      <span class="step active">1. Review</span>
+      <span class="sep">›</span>
+      <span class="step">2. Delivery</span>
+      <span class="sep">›</span>
+      <span class="step">3. Payment</span>
+    </div>
+    <h1>Cart Review</h1>
+  </div>
+
+  <div class="checkout-layout">
+
+    <!-- Cart items -->
+    <div class="cart-items">
+      <div *ngFor="let item of items(); trackBy: trackById" class="cart-row">
+        <img [src]="item.thumbnail" [alt]="item.name" class="item-thumb" />
+
+        <div class="item-info">
+          <p class="item-name">{{ item.name }}</p>
+          <p class="item-unit">₹{{ item.price | number:'1.0-0' }} each</p>
+        </div>
+
+        <input
+          type="number"
+          class="qty-input"
+          [value]="item.quantity"
+          [min]="1"
+          [max]="item.stock"
+          (change)="updateQty(item.productId, $event)"
+        />
+
+        <p class="item-total">₹{{ (item.price * item.quantity) | number:'1.0-0' }}</p>
+
+        <button class="btn-remove" (click)="remove(item.productId)" aria-label="Remove item">Clear</button>
+      </div>
+    </div>
+
+    <!-- Order summary -->
+    <aside class="order-summary">
+      <h2>Summary</h2>
+
+      <ng-container *ngIf="items() | orderTotal:taxRate as t">
+        <div class="summary-row">
+          <span>Subtotal</span>
+          <span>₹{{ t.subtotal | number:'1.0-0' }}</span>
+        </div>
+        <div class="summary-row">
+          <span>GST (18%)</span>
+          <span>₹{{ t.tax | number:'1.0-0' }}</span>
+        </div>
+        <div class="summary-row grand">
+          <span>Total</span>
+          <span>₹{{ t.total | number:'1.0-0' }}</span>
+        </div>
+      </ng-container>
+
+      <button class="btn-proceed" (click)="proceed()">
+        Proceed to Delivery →
+      </button>
+    </aside>
+
+  </div>
+</div>

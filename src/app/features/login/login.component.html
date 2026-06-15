@@ -1,0 +1,126 @@
+<div class="login-container">
+
+  <!-- ========================= -->
+  <!-- TITLE -->
+  <!-- ========================= -->
+  <h2>
+    {{ mode() === 'login' ? 'Login' : 'Create Account 🚀' }}
+  </h2>
+
+  <!-- ========================= -->
+  <!-- LOADING -->
+  <!-- ========================= -->
+  @if (loading()) {
+    <div class="skeleton">
+      Processing...
+    </div>
+  } @else {
+
+    <!-- ========================= -->
+    <!-- LOGIN FORM -->
+    <!-- ========================= -->
+    @if (mode() === 'login') {
+
+      <form [formGroup]="form" (ngSubmit)="submit()">
+
+        <input
+          type="email"
+          formControlName="email"
+          placeholder="Enter your email"
+        />
+
+        @if (form.controls.email.invalid && form.controls.email.touched) {
+          <small class="error">Please enter a valid email</small>
+        }
+
+        <input
+          type="password"
+          formControlName="password"
+          placeholder="Enter your password"
+        />
+
+        @if (form.controls.password.invalid && form.controls.password.touched) {
+          <small class="error">Password is required</small>
+        }
+
+        @if (error()) {
+          <p class="error">{{ error() }}</p>
+        }
+
+        <button type="submit" [disabled]="form.invalid || loading()">
+          Login
+        </button>
+
+      </form>
+
+    }
+
+    <!-- ========================= -->
+    <!-- SIGNUP FORM -->
+    <!-- ========================= -->
+    @if (mode() === 'signup') {
+
+      <form [formGroup]="signupForm" (ngSubmit)="submit()">
+
+        <input
+          type="text"
+          formControlName="name"
+          placeholder="Enter your name"
+        />
+
+        @if (signupForm.controls.name.invalid && signupForm.controls.name.touched) {
+          <small class="error">Name is required</small>
+        }
+
+        <input
+          type="email"
+          formControlName="email"
+          placeholder="Enter your email"
+        />
+
+        @if (signupForm.controls.email.invalid && signupForm.controls.email.touched) {
+          <small class="error">Valid email is required</small>
+        }
+
+        <input
+          type="password"
+          formControlName="password"
+          placeholder="Create password"
+        />
+
+        @if (signupForm.controls.password.invalid && signupForm.controls.password.touched) {
+          <small class="error">Password is required</small>
+        }
+
+        @if (error()) {
+          <p class="error">{{ error() }}</p>
+        }
+
+        <button type="submit" [disabled]="signupForm.invalid || loading()">
+          Create Account
+        </button>
+
+      </form>
+
+    }
+
+  }
+
+  <!-- ========================= -->
+  <!-- TOGGLE SECTION -->
+  <!-- ========================= -->
+  <div class="toggle">
+
+    @if (mode() === 'login') {
+      <p (click)="toggleMode()">
+        New user? <strong>Create account</strong>
+      </p>
+    } @else {
+      <p (click)="toggleMode()">
+        Already have account? <strong>Login</strong>
+      </p>
+    }
+
+  </div>
+
+</div>

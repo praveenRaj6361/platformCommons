@@ -1,0 +1,36 @@
+<div class="checkout-page">
+
+  <div class="step-header">
+    <div class="step-trail">
+      <span class="step done">1. Review ✓</span>
+      <span class="sep">›</span>
+      <span class="step active">2. Delivery</span>
+      <span class="sep">›</span>
+      <span class="step">3. Payment</span>
+    </div>
+    <h1>Delivery Details</h1>
+  </div>
+
+  <!-- Form skeleton while JSON config loads -->
+  <div *ngIf="!form()" class="form-skeleton">
+    <div class="skel-row" *ngFor="let s of [1,2,3,4,5,6]">
+      <div class="skel-label"></div>
+      <div class="skel-input"></div>
+    </div>
+  </div>
+
+  <div class="delivery-card" *ngIf="form() as f">
+    <form [formGroup]="f" (ngSubmit)="submit()" novalidate>
+
+      <app-dynamic-form-renderer
+        [config]="formConfig()"
+        [formGroup]="f"
+      />
+
+      <div class="form-actions">
+        <a routerLink="/shop/checkout/step/1" class="btn-back">← Back</a>
+        <button type="submit" class="btn-next">Continue to Payment →</button>
+      </div>
+    </form>
+  </div>
+</div>
