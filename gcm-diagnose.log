@@ -1,0 +1,190 @@
+﻿Diagnose log at 2026-06-16T06:38:31Z
+
+AppPath: C:\Users\Praveen\AppData\Local\Programs\Git\mingw64\bin\git-credential-manager.exe
+InstallDir: C:\Users\Praveen\AppData\Local\Programs\Git\mingw64\bin\
+Version: 2.6.0+3c28096588f549cb46f36b552390514356830abe
+
+------------
+Diagnostic: Environment
+Skipped: False
+Success: True
+Exception: None
+Log:
+OSType: Windows
+OSVersion: 10.0 (build 26200)
+Reading environment variables... OK
+ Variables:
+HOMEPATH=\Users\Praveen
+DriverData=C:\Windows\System32\Drivers\DriverData
+COMPUTERNAME=PRAVEEN_IT_SE_H
+GIT_TRACE2_PARENT_SID=304df1eb-0e68-4b5b-b5b7-50c74dc57f0a
+CommonProgramFiles(x86)=C:\Program Files (x86)\Common Files
+OneDrive=C:\Users\Praveen\OneDrive - Vridhi Finserv Limited
+SESSIONNAME=Console
+nvm4w=C:\nvm4w
+TMP=C:\Users\Praveen\AppData\Local\Temp
+PROCESSOR_REVISION=9a03
+PATHEXT=.COM;.EXE;.BAT;.CMD;.VBS;.VBE;.JS;.JSE;.WSF;.WSH;.MSC;.PY;.PYW
+SystemDrive=C:
+GIT_EXEC_PATH=C:/Users/Praveen/AppData/Local/Programs/Git/mingw64/libexec/git-core
+TEMP=C:\Users\Praveen\AppData\Local\Temp
+LOCALAPPDATA=C:\Users\Praveen\AppData\Local
+MSYSTEM=MINGW64
+TERM=xterm-256color
+nvm=C:\Users\Praveen\AppData\Local\nvm
+COLORTERM=truecolor
+USERDOMAIN=PRAVEEN_IT_SE_H
+nvm-nodejs=C:\Users\Praveen\AppData\Local\nvm\nodejs
+PROCESSOR_LEVEL=6
+PROCESSOR_IDENTIFIER=Intel64 Family 6 Model 154 Stepping 3, GenuineIntel
+TMPDIR=C:\Users\Praveen\AppData\Local\Temp
+EFC_9756_1592913036=1
+ProgramFiles(x86)=C:\Program Files (x86)
+PUBLIC=C:\Users\Public
+NUMBER_OF_PROCESSORS=12
+CommonProgramFiles=C:\Program Files (x86)\Common Files
+EFC_9756_344590478=1
+PROMPT=$P$G
+IGCCSVC_DB=AQAAANCMnd8BFdERjHoAwE/Cl+sBAAAAEg3r0pk97ESZWrn2sjJcFQQAAAACAAAAAAAQZgAAAAEAACAAAACi6O0kOAc9ypBqVB5EkMjSoPRw9C00PzBEg0SurPzmcgAAAAAOgAAAAAIAACAAAADzVmoPcz5iOq+XlBZvV7qL67CFdnGKry3kGyuoVPa6UGAAAACkC057w5Ob8OdxLIe4HLQU/iH2V5iNFDHw/8xHP0PPOBZty3Xp6y86AgimdmjyX+dE+AYqumxdTp9kvENLcMnlzGRJYuwimq4GT1vHov8cOd/rs7orhs7yUDAy7PRc/jdAAAAAd96Z8I+E3tEyumHNa8RaMCzthXbaZPENTLpuMti+0eBlN6nqNS3XkvvaSx1yYrzmY2uj55UoURoUgF8DHClnhQ==
+PLINK_PROTOCOL=ssh
+ProgramData=C:\ProgramData
+ProgramFiles=C:\Program Files (x86)
+ChocolateyInstall=C:\ProgramData\chocolatey
+ProgramW6432=C:\Program Files
+NVM_SYMLINK=C:\nvm4w\nodejs
+NVM_HOME=C:\Users\Praveen\AppData\Local\nvm
+HOME=C:\Users\Praveen
+LC_CTYPE=C.UTF-8
+CommonProgramW6432=C:\Program Files\Common Files
+ZES_ENABLE_SYSMAN=1
+LOGONSERVER=\\PRAVEEN_IT_SE_H
+USERPROFILE=C:\Users\Praveen
+SystemRoot=C:\WINDOWS
+USERDOMAIN_ROAMINGPROFILE=PRAVEEN_IT_SE_H
+APPDATA=C:\Users\Praveen\AppData\Roaming
+HOMEDRIVE=C:
+OneDriveCommercial=C:\Users\Praveen\OneDrive - Vridhi Finserv Limited
+PSModulePath=C:\Program Files\WindowsPowerShell\Modules;C:\WINDOWS\system32\WindowsPowerShell\v1.0\Modules
+USERNAME=Praveen
+PROCESSOR_ARCHITEW6432=AMD64
+PROCESSOR_ARCHITECTURE=x86
+OS=Windows_NT
+ComSpec=C:\WINDOWS\system32\cmd.exe
+Path=C:/Users/Praveen/AppData/Local/Programs/Git/mingw64/libexec/git-core;C:\Users\Praveen\AppData\Local\Programs\Git\mingw64\bin;C:\Users\Praveen\AppData\Local\Programs\Git\usr\bin;C:\Users\Praveen\bin;C:\Python313\Scripts\;C:\Python313\;C:\WINDOWS\system32;C:\WINDOWS;C:\WINDOWS\System32\Wbem;C:\WINDOWS\System32\WindowsPowerShell\v1.0\;C:\WINDOWS\System32\OpenSSH\;C:\Program Files\PuTTY\;C:\Users\Praveen\AppData\Roaming\Python\Python312;C:\Users\Praveen\AppData\Roaming\Python\Python312\Scripts;C:\Users\Praveen\AppData\Local\nvm;C:\nvm4w\nodejs;;C:\ProgramData\chocolatey\bin;C:\Program Files\nodejs\;C:\Users\Praveen\AppData\Local\Microsoft\WindowsApps;C:\Users\Praveen\AppData\Local\Programs\Microsoft VS Code\bin;C:\Users\Praveen\AppData\Local\Programs\Git\cmd;C:\Users\Praveen\AppData\Local\GitHubDesktop\bin;C:\Users\Praveen\AppData\Local\Programs\Python\Python312;C:\Users\Praveen\AppData\Local\Programs\Python\Python312\Scripts;C:\Users\Praveen\AppData\Roaming\npm;
+windir=C:\WINDOWS
+ALLUSERSPROFILE=C:\ProgramData
+
+
+------------
+Diagnostic: File system
+Skipped: False
+Success: True
+Exception: None
+Log:
+Temporary directory is 'C:\Users\Praveen\AppData\Local\Temp\'...
+Checking basic file I/O...
+Writing to temporary file 'C:\Users\Praveen\AppData\Local\Temp\f3704950bfdd9f134ffb6efd'... OK
+Reading from temporary file 'C:\Users\Praveen\AppData\Local\Temp\f3704950bfdd9f134ffb6efd'... OK
+Deleting temporary file 'C:\Users\Praveen\AppData\Local\Temp\f3704950bfdd9f134ffb6efd'... OK
+Testing IFileSystem instance...
+UserHomePath: C:\Users\Praveen
+UserDataDirectoryPath: C:\Users\Praveen\.gcm
+GetCurrentDirectory(): C:\project-K\ecommerce-platform
+
+------------
+Diagnostic: Networking
+Skipped: False
+Success: True
+Exception: None
+Log:
+Checking networking and HTTP stack...
+Creating HTTP client... OK
+IsNetworkAvailable: True
+Sending HEAD request to http://example.com...Sending HEAD request to https://example.com... OK
+ OK
+Acquiring free TCP port... OK
+Testing local HTTP loopback connections...
+Creating new HTTP listener for http://localhost:64370/... OK
+Waiting for loopback connection... OK
+Writing response... OK
+Waiting for response data... OK
+Loopback connection data OK
+
+------------
+Diagnostic: Git
+Skipped: False
+Success: True
+Exception: None
+Log:
+Getting Git version... OK
+Git version is '2.47.1.windows.1'
+Locating current repository...Git repository at 'C:/project-K/ecommerce-platform/.git'
+ OK
+Listing all Git configuration... OK
+Git configuration:
+file:C:/Users/Praveen/AppData/Local/Programs/Git/etc/gitconfig	diff.astextplain.textconv=astextplain
+file:C:/Users/Praveen/AppData/Local/Programs/Git/etc/gitconfig	filter.lfs.clean=git-lfs clean -- %f
+file:C:/Users/Praveen/AppData/Local/Programs/Git/etc/gitconfig	filter.lfs.smudge=git-lfs smudge -- %f
+file:C:/Users/Praveen/AppData/Local/Programs/Git/etc/gitconfig	filter.lfs.process=git-lfs filter-process
+file:C:/Users/Praveen/AppData/Local/Programs/Git/etc/gitconfig	filter.lfs.required=true
+file:C:/Users/Praveen/AppData/Local/Programs/Git/etc/gitconfig	http.sslbackend=openssl
+file:C:/Users/Praveen/AppData/Local/Programs/Git/etc/gitconfig	http.sslcainfo=C:/Users/Praveen/AppData/Local/Programs/Git/mingw64/etc/ssl/certs/ca-bundle.crt
+file:C:/Users/Praveen/AppData/Local/Programs/Git/etc/gitconfig	core.autocrlf=true
+file:C:/Users/Praveen/AppData/Local/Programs/Git/etc/gitconfig	core.fscache=true
+file:C:/Users/Praveen/AppData/Local/Programs/Git/etc/gitconfig	core.symlinks=false
+file:C:/Users/Praveen/AppData/Local/Programs/Git/etc/gitconfig	pull.rebase=false
+file:C:/Users/Praveen/AppData/Local/Programs/Git/etc/gitconfig	credential.helper=manager
+file:C:/Users/Praveen/AppData/Local/Programs/Git/etc/gitconfig	credential.https://dev.azure.com.usehttppath=true
+file:C:/Users/Praveen/AppData/Local/Programs/Git/etc/gitconfig	init.defaultbranch=master
+file:C:/Users/Praveen/.gitconfig	filter.lfs.required=true
+file:C:/Users/Praveen/.gitconfig	filter.lfs.clean=git-lfs clean -- %f
+file:C:/Users/Praveen/.gitconfig	filter.lfs.smudge=git-lfs smudge -- %f
+file:C:/Users/Praveen/.gitconfig	filter.lfs.process=git-lfs filter-process
+file:C:/Users/Praveen/.gitconfig	credential.https://git-codecommit.ap-south-1.amazonaws.com.provider=generic
+file:C:/Users/Praveen/.gitconfig	user.email=praveenkumarpk8247@gmail.com
+file:C:/Users/Praveen/.gitconfig	user.name=praveenRaj6361
+file:.git/config	core.repositoryformatversion=0
+file:.git/config	core.filemode=false
+file:.git/config	core.bare=false
+file:.git/config	core.logallrefupdates=true
+file:.git/config	core.symlinks=false
+file:.git/config	core.ignorecase=true
+file:.git/config	remote.origin.url=https://github.com/praveenRaj6361/platformCommons.git
+file:.git/config	remote.origin.fetch=+refs/heads/*:refs/remotes/origin/*
+
+
+------------
+Diagnostic: Credential storage
+Skipped: False
+Success: True
+Exception: None
+Log:
+ICredentialStore instance is of type: CredentialStore
+Writing test credential... OK
+Reading test credential... OK
+Deleting test credential... OK
+
+------------
+Diagnostic: Microsoft authentication (AAD/MSA)
+Skipped: False
+Success: True
+Exception: None
+Log:
+Broker is not enabled.
+Flow type is: Auto
+Gathering MSAL token cache data... OK
+CacheDirectory: C:\Users\Praveen\AppData\Local\.IdentityService
+CacheFileName: msal.cache
+CacheFilePath: C:\Users\Praveen\AppData\Local\.IdentityService\msal.cache
+Creating cache helper... OK
+Verifying MSAL token cache persistence... OK
+
+------------
+Diagnostic: GitHub API
+Skipped: False
+Success: True
+Exception: None
+Log:
+Using 'https://github.com/' as API target.
+Querying '/meta' endpoint... OK
+
