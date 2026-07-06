@@ -11,8 +11,13 @@
   <!-- LOADING -->
   <!-- ========================= -->
   @if (loading()) {
-    <div class="skeleton">
-      Processing...
+    <div class="skeleton-form">
+      <div class="skeleton-line skeleton-input"></div>
+      <div class="skeleton-line skeleton-input"></div>
+      @if (mode() === 'signup') {
+        <div class="skeleton-line skeleton-input"></div>
+      }
+      <div class="skeleton-line skeleton-button"></div>
     </div>
   } @else {
 

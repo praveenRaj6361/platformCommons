@@ -16,6 +16,7 @@ import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
 
 import { ProductStoreService } from '../../../core/store/product-store.service';
 import { ProductApiService } from '../../../core/services/product-api.service';
+import { ToastService } from '../../../core/services/toast.service'
 
 @Component({
   standalone: true,
@@ -30,6 +31,7 @@ export class ProductsComponent implements OnInit {
   // =========================
   store = inject(ProductStoreService);
   api = inject(ProductApiService);
+  toastService = inject(ToastService);
   destroyRef = inject(DestroyRef);
 
   // =========================
@@ -59,6 +61,11 @@ export class ProductsComponent implements OnInit {
     price: 0,
     stock: 0
   });
+
+  // =========================
+  // PAGINATION SETTINGS
+  // =========================
+  readonly pageWindowSize = 4;
 
   // =========================
   // INIT (replaces constructor)
@@ -171,9 +178,39 @@ export class ProductsComponent implements OnInit {
     }
   }
 
+  goToPage(page: number) {
+    if (page === this.currentPage) return;
+    this.store.setPage(page);
+  }
+
   get currentPage(): number {
     return Math.floor(this.store.skip() / this.store.limit()) + 1;
   }
+
+  readonly totalPages = computed(() => {
+    return Math.max(1, Math.ceil(this.store.total() / this.store.limit()));
+  });
+
+  // Sliding window of page numbers (default shows 4 pages)
+  readonly visiblePages = computed(() => {
+    const total = this.totalPages();
+    const current = this.currentPage;
+    const windowSize = Math.min(this.pageWindowSize, total);
+
+    let start = Math.max(1, current - Math.floor(windowSize / 2));
+    let end = start + windowSize - 1;
+
+    if (end > total) {
+      end = total;
+      start = Math.max(1, end - windowSize + 1);
+    }
+
+    const pages: number[] = [];
+    for (let i = start; i <= end; i++) {
+      pages.push(i);
+    }
+    return pages;
+  });
 
   // =========================
   // SORT ICON
@@ -192,8 +229,8 @@ export class ProductsComponent implements OnInit {
       id: null,
       title: '',
       category: '',
-      price: 0,
-      stock: 0
+      price: '',
+      stock: ''
     });
     this.isFormOpen.set(true);
   }

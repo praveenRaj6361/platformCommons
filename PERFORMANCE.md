@@ -1,8 +1,8 @@
 # PERFORMANCE.md
+<!-- 
+> Measurements taken against `ng serve --configuration=production` (AOT, no source maps). LCP/CLS via `PerformanceObserver` on `/shop`, averaged over 3 cold loads. Bundle sizes from Lighthouse "Network payloads" panel. -->
 
-> Measurements taken against `ng serve --configuration=production` (AOT, no source maps). LCP/CLS via `PerformanceObserver` on `/shop`, averaged over 3 cold loads. Bundle sizes from Lighthouse "Network payloads" panel.
-
----
+--- 
 
 ## 1 — OnPush + Signals on `CatalogueComponent` and `ProductCardComponent`
 

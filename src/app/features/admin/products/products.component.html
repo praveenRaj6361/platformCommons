@@ -129,17 +129,24 @@
     <button
       (click)="prevPage()"
       class="page-btn"
+      [disabled]="currentPage === 1"
     >
       Prev
     </button>
 
-    <span class="page-info">
-      Page {{ currentPage }}
-    </span>
+    <button
+      *ngFor="let p of visiblePages()"
+      (click)="goToPage(p)"
+      class="page-number-btn"
+      [class.active]="p === currentPage"
+    >
+      {{ p }}
+    </button>
 
     <button
       (click)="nextPage()"
       class="page-btn"
+      [disabled]="currentPage === totalPages()"
     >
       Next
     </button>
@@ -242,4 +249,19 @@
 
   </div>
 
+</div>
+
+<!-- ================================= -->
+<!-- TOASTS -->
+<!-- ================================= -->
+<div class="toast-container">
+  <div
+    *ngFor="let t of toastService.toasts()"
+    class="toast"
+    [class.toast-error]="t.type === 'error'"
+    [class.toast-success]="t.type === 'success'"
+  >
+    {{ t.message }}
+    <button class="toast-close" (click)="toastService.dismiss(t.id)">×</button>
+  </div>
 </div>

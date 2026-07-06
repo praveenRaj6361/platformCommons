@@ -1,11 +1,13 @@
 import { Injectable, signal, inject } from '@angular/core';
 import { interval, Subscription } from 'rxjs';
 import { ProductApiService } from '../services/product-api.service';
+import { ToastService } from '../services/toast.service';
 
 @Injectable({ providedIn: 'root' })
 export class ProductStoreService {
 
   private api = inject(ProductApiService);
+  private toast = inject(ToastService);
 
   // ── State ──────────────────────────────────────────────
   readonly products = signal<any[]>([]);
@@ -85,20 +87,25 @@ export class ProductStoreService {
     );
   }
 
-  deleteProduct(id: number): void {
-    const backup = this.products();
-    this.products.update(list => list.filter(p => p.id !== id));
-    this.total.update(t => Math.max(0, t - 1));
 
-    this.api.deleteProduct(id).subscribe({
-      next: () => {},
-      error: () => {
-        // Rollback
-        this.products.set(backup);
-        this.total.update(t => t + 1);
-      }
-    });
-  }
+
+deleteProduct(id: number): void {
+  const backup = this.products();
+  this.products.update(list => list.filter(p => p.id !== id));
+  this.total.update(t => Math.max(0, t - 1));
+
+  this.api.deleteProduct(id).subscribe({
+    next: () => {
+      this.toast.show('Product deleted successfully', 'success');
+    },
+    error: () => {
+      // Rollback
+      this.products.set(backup);
+      this.total.update(t => t + 1);
+      this.toast.show('Something went wrong. Please try again.', 'error');
+    }
+  });
+}
 
 
   destroy(): void {
